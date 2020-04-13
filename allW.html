@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Co Workers - Homepage</title>
+  <meta name="description" content="Every situation - even a disaster - is an opportunity to be your best" />
+  <meta name="keywords" content="co-worker,office space" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" title="style" />
+  <script type="text/javascript" src="js/script.js"></script>
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <h1><a href="index.html">Co<span class="logo_colour">Worker</span></a></h1>
+          <h2>Every situation - even a disaster - is an opportunity to be your best</h2>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <li><a href="index.html">Home</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+      <div id="content">
+        <h2>All Workspaces</h2>
+          <table id="workspaces">
+          <th>Name</th>
+          <th>Type</th>
+          <th>Seating Capcity</th>
+          <th>Availibility</th>
+          <th>Lease Term</th>
+          <th>Price</th>
+          <th>Smoking</th>
+          <th>View</th>
+        </table>
+      </div>
+    </div>
+    <div id="content_footer"></div>
+    <div id="footer">
+      Copyright &copy; 2020 | <a href="#">Co-Worker.com</a>  | <a href="#">Design & Developed By Kunwar Bambrah</a>
+    </div>
+  </div>
+
+    <script>
+      var urlParams = new URLSearchParams(window.location.search);
+
+      Loged("/accountuse.json").then(user => {
+        Loged("/p.json").then(properties => {
+          Loged("/w.json").then(workspaces => {
+        append(user, properties, workspaces)
+      })
+    })
+  })
+      function append(user, properties, workspaces){
+        for (i = 0; i < workspaces.length; i++) {
+          var myWorkspace = workspaces[i];
+          var workspaceTable = document.getElementById('workspaces');
+          var nameText = document.createTextNode(myWorkspace.name);
+          var typeText = document.createTextNode(myWorkspace.type);
+          var seatingText = document.createTextNode(myWorkspace.seatingcapacity);
+          var availibilityText = document.createTextNode(
+            myWorkspace.availibilitydate
+          );
+
+          var leaseText = document.createTextNode(`
+            ${myWorkspace.leaseterm} ${myWorkspace.leasetype}${
+            parseInt(myWorkspace.leasetype) > 1 ? 's' : ''
+          }`);
+          var priceText = document.createTextNode(myWorkspace.price);
+          var smokingText = document.createTextNode(
+            myWorkspace.smoking ? 'Allowed' : 'Not Allowed'
+          );
+          var nameNode = document.createElement('td');
+          var typeNode = document.createElement('td');
+          var seatingNode = document.createElement('td');
+          var availibilityNode = document.createElement('td');
+          var leaseNode = document.createElement('td');
+          var priceNode = document.createElement('td');
+          var smokingNode = document.createElement('td');
+
+          var row = document.createElement('tr');
+          nameNode.appendChild(nameText);
+          row.appendChild(nameNode);
+          typeNode.appendChild(typeText);
+          row.appendChild(typeNode);
+          seatingNode.appendChild(seatingText);
+          row.appendChild(seatingNode);
+          availibilityNode.appendChild(availibilityText);
+          row.appendChild(availibilityNode);
+          leaseNode.appendChild(leaseText);
+          row.appendChild(leaseNode);
+          priceNode.appendChild(priceText);
+          row.appendChild(priceNode);
+          smokingNode.appendChild(smokingText);
+          row.appendChild(smokingNode);
+
+          var viewLinkNode = document.createElement('td');
+          var viewLink = document.createElement('a');
+          var viewLinkText = document.createTextNode('View Details');
+          viewLink.appendChild(viewLinkText);
+          viewLinkNode.appendChild(viewLink);
+          row.appendChild(viewLinkNode);
+
+          workspaceTable.appendChild(row);
+        }
+      }
+        
+      
+    </script>
+
+</body>
+</html>

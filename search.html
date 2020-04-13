@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Co Workers - Homepage</title>
+  <meta name="description" content="Every situation - even a disaster - is an opportunity to be your best" />
+  <meta name="keywords" content="co-worker,office space" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" title="style" />
+  <script type="text/javascript" src="js/script.js"></script>
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <h1><a href="index.html">Co<span class="logo_colour">Worker</span></a></h1>
+          <h2>Every situation - even a disaster - is an opportunity to be your best</h2>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <li><a href="index.html">Home</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+      <div id="content">
+        <h2>Search</h2>
+         <form action="results.html">
+           <table>
+          <tr>
+            <td><label for="type">Choose a filter</label></th>
+            <td><select name="filter" id="filter" onChange="handleSearch()">
+              <option value="address">Address</option>
+              <option value="neighborhood">Neighborhood</option>
+              <option value="sqft">Square Feet</option>
+              <option value="withParking">With Parking</option>
+              <option value="withoutParking">Without Parking</option>
+              <option value="withTransportation">With Public Transportation</option>
+              <option value="withoutTransportation">Without Public Transportation</option>
+              <option value="seating">Seating Capacity</option>
+              <option value="withSmoking">With Smoking</option>
+              <option value="withoutSmoking">Without Smoking</option>
+              <option value="availibilityDate">Availibility Date</option>
+              <option value="leaseTerm">Lease Term</option>
+              <option value="price">Price</option>
+            </select></td>
+          </tr>
+
+          <tr id="search-field">
+            <th><label for="name">Search</label></th>
+            <td><input type="text" name="query" placeholder="Query"/>
+            
+            </td>
+          </tr>
+
+          <tr>
+            <td><button>Search</button></th>
+            <td><button class="standard">Reset</button></td>
+          </tr>
+        </table>
+        </form>
+      </div>
+    </div>
+    <div id="content_footer"></div>
+    <div id="footer">
+      Copyright &copy; 2020 | <a href="#">Co-Worker.com</a>  | <a href="#">Design & Developed By Kunwar Bambrah</a>
+    </div>
+  </div>
+
+    <script>
+      function handleSearch() {
+        var value = document.getElementById('filter').value;
+        var searchField = document.getElementById('search-field');
+
+        if(value == 'withParking' || value == 'withoutParking' || value == 'withTransportation' || value == 'withoutTransportation' || value == 'withSmoking' || value == 'withoutSmoking') {
+          searchField.style.display = 'none';
+        } else {
+          searchField.style.display = 'block';
+        }
+      }
+    </script>
+
+</body>
+</html>

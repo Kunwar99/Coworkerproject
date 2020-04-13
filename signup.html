@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Co Workers - Homepage</title>
+  <meta name="description" content="Every situation - even a disaster - is an opportunity to be your best" />
+  <meta name="keywords" content="co-worker,office space" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" title="style" />
+  <script type="text/javascript" src="js/script.js"></script>
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <h1><a href="index.html">Co<span class="logo_colour">Worker</span></a></h1>
+          <h2>Every situation - even a disaster - is an opportunity to be your best</h2>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <li><a href="index.html">Home</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+      <div id="content">
+        <h2>Signup</h2>
+        <form class="form_settings" action = "/signupnode" method="POST">
+          <table>
+            <tr>
+            <td><label for="name">Name</label></td>
+            <td><input type="text" name="name" placeholder="Full Name" id="signup-name"/></td>
+            </tr>
+            <tr>
+            <td><label for="name">Phone Number</label></td>
+            <td><input type="number" name="phone-number" placeholder="Phone Number" id="signup-phone-number"/></td>
+            </tr>
+            <tr>
+            <td><label for="name">Email Address</label></td>
+            <td><input type="email" name="email" placeholder="Email Address" id="signup-email"/></td>
+            </tr>
+            <tr>
+            <td><label for="password">Password</label></td>
+            <td><input type="password" name="password" placeholder="Password" id="signup-password"/></td>
+            </tr>
+            <tr>
+            <td><label for="name">Role</label></td>
+            <td><input type="radio" name="role" value="owner" id="signup-role" /> Owner
+            <input type="radio" name="role" value="co-worker" id="signup-role" /> Co Worker
+            </td>
+            </tr>
+          
+            <tr>
+            <td><button>Signup</button></td>
+            <td><button>Reset</button></td>
+          </tr>
+        </table>
+        </form>
+
+      </div>
+    </div>
+    <div id="content_footer"></div>
+    <div id="footer">
+      Copyright &copy; 2020 | <a href="#">Co-Worker.com</a>  | <a href="#">Design & Developed By Kunwar Bambrah</a>
+    </div>
+  </div>
+</body>
+</html>

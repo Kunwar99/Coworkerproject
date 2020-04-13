@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Co Workers - Homepage</title>
+  <meta name="description" content="Every situation - even a disaster - is an opportunity to be your best" />
+  <meta name="keywords" content="co-worker,office space" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" title="style" />
+  <script type="text/javascript" src="js/script.js"></script>
+
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <h1><a href="index.html">Co<span class="logo_colour">Worker</span></a></h1>
+          <h2>Every situation - even a disaster - is an opportunity to be your best</h2>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <li><a href="index.html">Home</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+      <div id="content">
+        <h2>Add Property</h2>
+        <form class="form_settings" action="/p" method="post">
+          <input type="hidden" id="pid" name="pid" value="">
+          <table>
+            <tr>
+            <td><label for="address">Address</label></th>
+            <td><input type="text" name="address" placeholder="Address" id="property-address"
+            /></td>
+            </tr>
+          <tr>
+            <td><label for="neighborhood">Neighborhood</label></th>
+            <td><input type="text" name="neighborhood" placeholder="Neighborhood" id="property-neighborhood"
+            /></td>
+          </tr>
+
+          <tr>
+            <td><label for="square-feet">Square Feet</label></th>
+            <td><input type="number" name="squarefeet" placeholder="Square Feet"
+              id="property-square-feet"/>
+            </td>
+          </tr>
+
+
+          <tr>
+            <td>Choose</td>
+            <td>
+              <input type="checkbox" name="parking" id="property-parking" />
+              <label for="parking">Parking Garage Availability</label>
+              <br/>
+              <input type="checkbox" name="transportation" id="property-transportation"
+              />
+              <label for="transportation">Accessible by Public Transport</label>
+              <br/>
+              <input type="checkbox" name="visibility" id="property-visibility"
+              />
+              <label for="visibility">Show workspaces in listing</label>
+            </td>
+          </tr>
+
+          <tr>
+            <td><button>Add</button></th>
+            <td><button class="standard">Reset</button></td>
+          </tr>
+        </table>
+        </form>
+      </div>
+    </div>
+    <div id="content_footer"></div>
+    <div id="footer">
+      Copyright &copy; 2020 | <a href="#">Co-Worker.com</a>  | <a href="#">Design & Developed By Kunwar Bambrah</a>
+    </div>
+  </div>
+<script>
+  document.getElementById("pid").value = Math.floor(Math.random() * 10000);
+</script>
+</body>
+</html>

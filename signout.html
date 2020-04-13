@@ -1,0 +1,12 @@
+<script>
+    window.onload = signout()
+    function signout(){
+    var url = "/signout";
+    var params = "hi";
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send(params);
+    window.location.href = 'index.html';
+    }
+</script>

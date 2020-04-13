@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Co Workers - Homepage</title>
+  <meta name="description" content="Every situation - even a disaster - is an opportunity to be your best" />
+  <meta name="keywords" content="co-worker,office space" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" title="style" />
+  <script type="text/javascript" src="js/script.js"></script>
+
+    <script>
+      if (isLoggedIn()) {
+        window.location.href = 'index.html';
+      }
+    </script>
+
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <h1><a href="index.html">Co<span class="logo_colour">Worker</span></a></h1>
+          <h2>Every situation - even a disaster - is an opportunity to be your best</h2>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <li><a href="index.html">Home</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+      <div id="content">
+        <h2>Login</h2>
+        <form class="form_settings" action ="/signin" method="post">
+          <table>
+            <tr>
+            <td><label for="name">Email Address</label></th>
+            <td><input type="email" name="email" placeholder="Email Address" id="login-email"/></td>
+            </tr>
+          <tr>
+            <td><label for="password">Password</label></th>
+            <td><input type="password" name="password" placeholder="Password" id="login-password"/></td>
+          </tr>
+          <tr>
+            <td><button>Login</button></th>
+            <td><button class="standard">Reset</button></td>
+          </tr>
+        </table>
+        </form>
+      </div>
+    </div>
+    <div id="content_footer"></div>
+    <div id="footer">
+      Copyright &copy; 2020 | <a href="#">Co-Worker.com</a>  | <a href="#">Design & Developed By Kunwar Bambrah</a>
+    </div>
+  </div>
+</body>
+</html>

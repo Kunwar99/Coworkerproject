@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Co Workers - Homepage</title>
+  <meta name="description" content="Every situation - even a disaster - is an opportunity to be your best" />
+  <meta name="keywords" content="co-worker,office space" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" title="style" />
+  <script type="text/javascript" src="js/script.js"></script>
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <h1><a href="index.html">Co<span class="logo_colour">Worker</span></a></h1>
+          <h2>Every situation - even a disaster - is an opportunity to be your best</h2>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <li><a href="index.html">Home</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+      <div id="content">
+        <h2>Your Properties</h2>
+          <table id="properties" cellpadding="20">
+          <th>Address</th>
+          <th>Neighborhood</th>
+          <th>Square Feet</th>
+          <th>Parking Garage</th>
+          <th>Accessible by Public Transport</th>
+          <th>Workspaces</th>
+          <th>Edit</th>
+        </table>
+      </div>
+    </div>
+    <div id="content_footer"></div>
+    <div id="footer">
+      Copyright &copy; 2020 | <a href="#">Co-Worker.com</a>  | <a href="#">Design & Developed By Kunwar Bambrah</a>
+    </div>
+  </div>
+
+    <script>
+      Loged("/accountuse.json").then(user => {
+        Loged("/p.json").then(properties => {
+        append(user, properties)
+      })
+    })
+
+      function append(user, properties){
+        for (i = 0; i < properties.length; i++) {
+          var myProperty = properties[i];
+          var propertyTable = document.getElementById('properties');
+          var addressText = document.createTextNode(myProperty.address);
+          var neighborhoodText = document.createTextNode(
+            myProperty.neighborhood
+          );
+          var sqftText = document.createTextNode(myProperty.squarefeet);
+          var parkingText = document.createTextNode(
+            myProperty.parking ? 'Yes' : 'No'
+          );
+          var transportationText = document.createTextNode(
+            myProperty.transportation ? 'Yes' : 'No'
+          );
+          var addressNode = document.createElement('td');
+          var neighborhoodNode = document.createElement('td');
+          var sqftNode = document.createElement('td');
+          var parkingNode = document.createElement('td');
+          var transportationNode = document.createElement('td');
+          var workspacesNode = document.createElement('td');
+          var editLinkNode = document.createElement('td');
+          var listingBtnNode = document.createElement('td');
+          var row = document.createElement('tr');
+          addressNode.appendChild(addressText);
+          row.appendChild(addressNode);
+          neighborhoodNode.appendChild(neighborhoodText);
+          row.appendChild(neighborhoodNode);
+          sqftNode.appendChild(sqftText);
+          row.appendChild(sqftNode);
+          parkingNode.appendChild(parkingText);
+          row.appendChild(parkingNode);
+          transportationNode.appendChild(transportationText);
+          row.appendChild(transportationNode);
+
+          var viewLink = document.createElement('a');
+
+          var viewLinkText = document.createTextNode('View');
+
+          viewLink.setAttribute(
+            'href',
+            'myW.html?id=' + myProperty.pid
+          );
+          viewLink.appendChild(viewLinkText);
+
+          var addLink = document.createElement('a');
+          var addLinkText = document.createTextNode('Add');
+          addLink.setAttribute(
+            'href',
+            'addW.html?id=' + myProperty.pid
+          );
+          addLink.setAttribute('style', 'margin-left: 15px;');
+
+          workspacesNode.appendChild(viewLink);
+          workspacesNode.appendChild(addLink);
+          addLink.appendChild(addLinkText);
+          row.appendChild(workspacesNode);
+
+          var editLink = document.createElement('a');
+          var editLinkText = document.createTextNode('Edit');
+          editLink.setAttribute(
+            'href',
+            `editP.html?id=${myProperty.pid}&address=${myProperty.address}&neighborhood=${myProperty.neighborhood}&sqft=${myProperty.squarefeet}&parking=${myProperty.parking}&transportation=${myProperty.transportation}&visibility=${myProperty.visibility}`
+          );
+          editLink.appendChild(editLinkText);
+          editLinkNode.appendChild(editLink);
+          row.appendChild(editLinkNode);
+
+          var listingBtn = document.createElement('button');
+          var listingBtnText = document.createTextNode(
+            myProperty.visibility.toString() == 'true' ? 'Un-list' : 'List'
+          );
+          listingBtn.setAttribute(
+            'onClick',
+            `handleListing(${myProperty.id}, ${myProperty.visibility})`
+          );
+          listingBtn.setAttribute(
+            'style',
+            `cursor: pointer; background: ${
+              myProperty.visibility.toString() == 'true' ? '#ff7070' : '#00d191'
+            }`
+          );
+          console.log(myProperty.visibility);
+          listingBtn.appendChild(listingBtnText);
+          listingBtnNode.appendChild(listingBtn);
+          row.appendChild(listingBtnNode);
+
+          propertyTable.appendChild(row);
+        }
+          }
+
+    </script>
+
+</body>
+</html>

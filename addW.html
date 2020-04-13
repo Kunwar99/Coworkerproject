@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Co Workers - Homepage</title>
+  <meta name="description" content="Every situation - even a disaster - is an opportunity to be your best" />
+  <meta name="keywords" content="co-worker,office space" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" title="style" />
+  <script type="text/javascript" src="js/script.js"></script>
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <h1><a href="index.html">Co<span class="logo_colour">Worker</span></a></h1>
+          <h2>Every situation - even a disaster - is an opportunity to be your best</h2>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="addP.html">Add New</a></li>
+          <li><a href="myP.html">My Properties</a></li>
+          <li><a href="signout.html">Sign Out</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+      <div id="content">
+        <h2>Add Workspace</h2>
+        <form class="form_settings" action="/w" method="post">
+          <input type="hidden" id="pid" name="pid" value="">
+          <input type="hidden" id="wid" name="wid" value="">
+          <table>
+            <tr>
+            <td><label for="name">Workspace Name</label></th>
+            <td><input type="text" name="name" placeholder="Workspace Name" id="workspace-name"
+            /></td>
+            </tr>
+          <tr>
+            <td><label for="type">Type</label></th>
+            <td><select name="type" id="workspace-type">
+              <option value="Meeting Room">Meeting Room</option>
+              <option value="Private Office Room">Private Office Room</option>
+              <option value="Open Area Desk">Open Area Desk</option>
+            </select></td>
+          </tr>
+
+          <tr>
+            <td><label for="seating-capacity">Seating Capacity</label></th>
+            <td><input type="number" name="seatingcapacity" placeholder="Seating Capacity"
+              id="workspace-seating-capacity"/>
+            </td>
+          </tr>
+
+          <tr>
+            <td><label for="availibility-date">Availibility Date</label></th>
+            <td><input type="text" name="availibilitydate" placeholder="Availibility Date [DD/MM/YYYY]" id="workspace-availibility-date"/>
+            </td>
+          </tr>
+
+          <tr>
+            <td><label for="lease-term">Lease Term</label></th>
+            <td><input type="number" name="leaseterm" placeholder="Lease Term" 
+              id="workspace-lease-term" style="width: 120px"/>
+              <select style="width: 70px; height: 28px; border: none; outline: none; background: #fff; border: 1px solid silver;"
+                name="lease-type" id="workspace-lease-type">
+                <option value="Day">Day</option>
+                <option value="Month">Month</option>
+                <option value="Year">Year</option>
+              </select>
+
+            </td>
+          </tr>                    
+
+          <tr>
+            <td><label for="price">Price</label></th>
+            <td><input type="number" name="price" placeholder="Price" id="workspace-price"
+            />
+            </td>
+          </tr>
+
+
+          <tr>
+            <td><label for="price">Choose</label></td>
+            <td>
+              <input type="checkbox" name="smoking" id="workspace-smoking" />
+              <label for="smoking">Smoking Allowance</label>
+              <br/>
+              <input type="checkbox" name="visibility" id="workspace-visibility"/>
+              <label for="visibility">Show in listings</label>
+            </td>
+          </tr>
+
+          <tr>
+            <td><button>Add</button></th>
+            <td><button class="standard">Reset</button></td>
+          </tr>
+        </table>
+        </form>
+      </div>
+    </div>
+    <div id="content_footer"></div>
+    <div id="footer">
+      Copyright &copy; 2020 | <a href="#">Co-Worker.com</a>  | <a href="#">Design & Developed By Kunwar Bambrah</a>
+    </div>
+  </div>
+
+    <script>
+      var urlParams = new URLSearchParams(window.location.search);
+      document.getElementById("pid").value = urlParams.get('id');
+      document.getElementById("wid").value = Math.floor(Math.random() * 10000);
+    </script>
+
+</body>
+</html>

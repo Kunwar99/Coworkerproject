@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Co Workers - Homepage</title>
+  <meta name="description" content="Every situation - even a disaster - is an opportunity to be your best" />
+  <meta name="keywords" content="co-worker,office space" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" title="style" />
+  <script type="text/javascript" src="js/script.js"></script>
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <h1><a href="index.html">Co<span class="logo_colour">Worker</span></a></h1>
+          <h2>Every situation - even a disaster - is an opportunity to be your best</h2>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <li><a href="index.html">Home</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+      <div id="content">
+        <h2>Add Workspace</h2>
+        <form class="form_settings" action="ew" method="post">
+          <input type="hidden" id="pid" name="pid" value="">
+          <input type="hidden" id="wid" name="wid" value="">
+          <table>
+            <tr>
+            <td><label for="name">Workspace Name</label></th>
+            <td><input type="text" name="name" placeholder="Workspace Name" id="workspace-name"
+            /></td>
+            </tr>
+          <tr>
+            <td><label for="type">Type</label></th>
+            </select></td>
+          </tr>
+
+          <tr>
+            <td><label for="seating-capacity">Seating Capacity</label></th>
+            <td><input type="number" name="seatingcapacity" placeholder="Seating Capacity"
+              id="workspace-seating-capacity"/>
+            </td>
+          </tr>
+
+          <tr>
+            <td><label for="availibility-date">Availibility Date</label></th>
+            <td><input type="text" name="availibilitydate" placeholder="Availibility Date [DD/MM/YYYY]" id="workspace-availibility-date"/>
+            </td>
+          </tr>
+
+          <tr>
+            <td><label for="lease-term">Lease Term</label></th>
+            <td><input type="number" name="leaseterm" placeholder="Lease Term" 
+              id="workspace-lease-term" style="width: 120px"/>
+              <select style="width: 70px; height: 28px; border: none; outline: none; background: #fff; border: 1px solid silver;"
+                name="leasetype" id="workspace-lease-type">
+                <option value="Day">Day</option>
+                <option value="Month">Month</option>
+                <option value="Year">Year</option>
+              </select>
+
+            </td>
+          </tr>                    
+
+          <tr>
+            <td><label for="price">Price</label></th>
+            <td><input type="number" name="price" placeholder="Price" id="workspace-price"
+            />
+            </td>
+          </tr>
+
+
+          <tr>
+            <td><label for="price">Choose</label></td>
+            <td>
+              <input type="checkbox" name="smoking" id="workspace-smoking" />
+              <label for="smoking">Smoking Allowance</label>
+              <br/>
+              <input type="checkbox" name="visibility" id="workspace-visibility"/>
+              <label for="visibility">Show in listings</label>
+            </td>
+          </tr>
+
+          <tr>
+            <td><button>Add</button></th>
+            <td><button class="standard">Reset</button></td>
+          </tr>
+        </table>
+        </form>
+      </div>
+    </div>
+    <div id="content_footer"></div>
+    <div id="footer">
+      Copyright &copy; 2020 | <a href="#">Co-Worker.com</a>  | <a href="#">Design & Developed By Kunwar Bambrah</a>
+    </div>
+  </div>
+
+    <script>
+      var urlParams = new URLSearchParams(window.location.search);
+      document.getElementById("pid").value = urlParams.get('propertyId');
+      document.getElementById("wid").value = urlParams.get('workspaceId');
+      var name = urlParams.get('name');
+      var type = urlParams.get('type');
+      var seating = urlParams.get('seating');
+      var availibility = urlParams.get('availibility');
+      var leaseTerm = urlParams.get('leaseTerm');
+      var leaseType = urlParams.get('leaseType');
+      var price = urlParams.get('price');
+      var smoking = urlParams.get('smoking');
+      var visibility = urlParams.get('visibility');
+
+      var nameEl = document.getElementById('workspace-name');
+      var typeEl = document.getElementById('workspace-type');
+      var seatingEl = document.getElementById('workspace-seating-capacity');
+      var availibilityEl = document.getElementById(
+        'workspace-availibility-date'
+      );
+      var leaseTermEl = document.getElementById('workspace-lease-term');
+      var leaseTypeEl = document.getElementById('workspace-lease-type');
+      var priceEl = document.getElementById('workspace-price');
+      var smokingEl = document.getElementById('workspace-smoking');
+      var visibilityEl = document.getElementById('workspace-visibility');
+
+      nameEl.value = name;
+      typeEl.value = type;
+      seatingEl.value = seating;
+      availibilityEl.value = availibility;
+      leaseTermEl.value = leaseTerm;
+      leaseTypeEl.value = leaseType;
+      priceEl.value = price;
+      smokingEl.checked = smoking == 'true' ? true : false;
+      visibilityEl.checked = visibility == 'true' ? true : false;
+
+      function editWorkspace(event) {
+        event.preventDefault();
+        var name = document.getElementById('workspace-name').value;
+        var type = document.getElementById('workspace-type').value;
+        var seating = document.getElementById('workspace-seating-capacity')
+          .value;
+        var availibility = document.getElementById(
+          'workspace-availibility-date'
+        ).value;
+        var leaseTerm = document.getElementById('workspace-lease-term').value;
+        var leaseType = document.getElementById('workspace-lease-type').value;
+        var price = document.getElementById('workspace-price').value;
+        var smoking = document.getElementById('workspace-smoking').checked;
+        var visibility = document.getElementById('workspace-visibility')
+          .checked;
+
+        if (
+          name == '' ||
+          type == undefined ||
+          seating == '' ||
+          availibility == '' ||
+          leaseTerm == '' ||
+          leaseType == undefined ||
+          price == ''
+        ) {
+          alert('Please fill in all the fields.');
+        } else {
+          var dateRegex = new RegExp(
+            /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/i
+          );
+          if (dateRegex.test(availibility)) {
+            var workspaces = JSON.parse(localStorage.getItem('workspaces'));
+            var urlParams = new URLSearchParams(window.location.search);
+            var currentWorkspace = urlParams.get('name');
+            var currentAvailibility = urlParams.get('availibility');
+            var propertyId = urlParams.get('propertyId');
+            var workspaceId = urlParams.get('workspaceId');
+            var success = false;
+            for (i = 0; i < workspaces.length; i++) {
+              if (workspaces[i].id == workspaceId) {
+                workspaces[i].name = name;
+                workspaces[i].type = type;
+                workspaces[i].seating = seating;
+                workspaces[i].availibility = availibility;
+                workspaces[i].leaseTerm = leaseTerm;
+                workspaces[i].leaseType = leaseType;
+                workspaces[i].price = price;
+                workspaces[i].smoking = smoking;
+                workspaces[i].visibility = visibility;
+                success = true;
+                break;
+              }
+            }
+            
+          }
+        }
+      }
+    </script>
+
+</body>
+</html>
