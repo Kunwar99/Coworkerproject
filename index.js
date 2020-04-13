@@ -1,89 +1,80 @@
-const fs = require('fs');
+var bodyParser = require('body-parser');
 const express = require('express')
-const app = express();
-const path = require('path')
-app.use(express.urlencoded({extended:true}));
-app.use(express.static(path.join(__dirname)));
-const PORT = process.env.PORT || 3000; 
-app.listen(PORT, () => console.log(`Using port ${PORT}`));
+const app = express()
+var db = require('./db');
+const port = 3000
 
-app.get("/", (request, response) => {
-  response.sendFile(__dirname + "/index.html");
-});
-
-app.post("/signupnode", (request, response) => {
-  fs.readFile('accounts.json', function (err, data){
-    let accounts = JSON.parse(data);
-    accounts.push(request.body);
-    fs.writeFileSync('accounts.json', JSON.stringify(accounts));
-    response.sendFile(__dirname + "/index.html");
-  })
-});
-
-app.post("/signin", (request, response) => {
-  fs.readFile('accounts.json', function (err, data){
-    let accounts = JSON.parse(data);
-    for(i = 0; i<accounts.length; i++){
-      if(request.body.email == accounts[i].email & request.body.password == accounts[i].password ){
-        let correct = accounts[i];
-        fs.writeFileSync('accountuse.json', JSON.stringify(correct));
-        response.sendFile(__dirname + "/index.html");
-      }
+var executeQuery = async function (query) {
+    var connectionPool = await db;
+    var result = await connectionPool.request().query(query);
+    console.log(result);
+    return result.recordset;
+  }
+  //send json formatted record set as a response
+  var sendQueryResults = async function (res, query) {
+    try {
+     var recordset = await executeQuery(query);
+     res.json(recordset);
     }
-    response.sendFile(__dirname + "/login.html");
-  })
-});
-
-app.post("/signout", (request, response) => {
-  fs.readFile('accountuse.json', function (err, data){
-    fs.writeFileSync('accountuse.json', "{}");
-    response.sendFile(__dirname + "/index.html");
-  })
-});
-
-app.post("/p", (request, response) => {
-  fs.readFile('p.json', function (err, data){
-    let accounts = JSON.parse(data);
-    accounts.push(request.body);
-    fs.writeFileSync('p.json', JSON.stringify(accounts));
-    response.sendFile(__dirname + "/addP.html");
-  })
-});
-
-app.post("/ep", (request, response) => {
-  fs.readFile('p.json', function (err, data){
-    let properties = JSON.parse(data);
-    for(i=0; i<properties.length; i++){
-      if(properties[i].pid == request.body.pid){
-        properties[i] = request.body;
-      }
+    catch (err) {
+        console.log(err);
+        res.status(400);
+      res.send({
+        success: false,
+        error: err,
+        status:400,
+      });
     }
-    fs.writeFileSync('p.json', JSON.stringify(properties));
-    response.sendFile(__dirname + "/myP.html");
-  })
+  };
+
+app.get('/', function(req, res) {
+    var query = "SELECT * FROM users";
+    sendQueryResults(res, query);
+    console.log("data from database sent to client")
+    //res.send('ok');
 });
 
-app.post("/w", (request, response) => {
-  fs.readFile('w.json', function (err, data){
-    let accounts = JSON.parse(data);
-    accounts.push(request.body);
-    fs.writeFileSync('w.json', JSON.stringify(accounts));
-    response.sendFile(__dirname + "/addW.html");
-  })
-});
 
-app.post("/ew", (request, response) => {
-  console.log("hi")
-  fs.readFile('w.json', function (err, data){
-    let workspaces = JSON.parse(data);
-    for(i=0; i<workspaces.length; i++){
-      console.log(workspaces[i].wid )
-      console.log(request.body.wid)
-      if(workspaces[i].wid == request.body.wid){
-        workspaces[i] = request.body;
-      }
-    }
-    fs.writeFileSync('w.json', JSON.stringify(workspaces));
-    response.sendFile(__dirname + "/myP.html");
-  })
-});
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+app.post('/insert', urlencodedParser, function(req, res) {
+    response = {
+                 name:req.body.names,
+                 phone_number:req.body.phone_numbers,
+                 email:req.body.emails,
+                 password:req.body.passwords,
+                 role:req.body.roles,
+             };
+    var query = "INSERT INTO users(name,phone_number, email, password, role) values('"+ response.name + " ','" +  response.phone_number +"','"+response.email +" ','" +response.password +"',' "+response.role +"')";
+    sendQueryResults(res, query);
+    console.log("data from database sent to client")
+  });
+
+  app.put('/update/:name', urlencodedParser, function(req, res) {
+       response = {
+                 name:req.body.names,
+                 phone_number:req.body.phone_numbers,
+                 email:req.body.emails,
+                 password:req.body.passwords,
+                 role:req.body.roles,
+             };
+    var query = "Update [users] SET email = '" + req.body.email + "' where name = '" + req.params.name + "' ";
+    sendQueryResults(res, query);
+    console.log("data from database sent to client")
+  });
+
+  app.delete('/delete/:email', urlencodedParser, function(req, res) {
+    var query = "Delete from users where email = '" + req.params.email +"'";
+    sendQueryResults(res, query);
+    console.log("data from database sent to client")
+  });
+
+
+// app.get('/', function(req, res) {
+//     res.send('Hello World!');
+// });
+
+app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+
+
+
+
